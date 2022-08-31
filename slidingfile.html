@@ -1,5 +1,20 @@
-<style>
-  * {
+<html lang="en" class="skrollr skrollr-desktop"><head>
+
+    <meta charset="UTF-8">
+    <title>CodePen Demo</title>
+  
+    <meta name="robots" content="noindex">
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+    <link rel="canonical" href="https://codepen.io/kilianso/pen/NaLzVW">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
+    <style class="INLINE_PEN_STYLESHEET_ID">
+      * {
     box-sizing: border-box;
   }
   
@@ -403,26 +418,17 @@
     transform: translate(-50%, -50%) rotate(90deg) scaleY(0.75);
     opacity: 1;
   }
-  </style>
-  
-    <script>
-    window.console = window.console || function(t) {};
-  </script>
+    </style>
   
     
-    
-    <script>
-    if (document.location.search.match(/type=embed/gi)) {
-      window.parent.postMessage("resize", "*");
-    }
-  </script>
-  
-  
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-7549a40147ccd0ba0a6b5373d87e770e49bb4689f1c2dc30cccc7463f207f997.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
   </head>
   
-  <body translate="no" style="height: 2134px;" data-new-gr-c-s-check-loaded="14.1078.0" data-gr-ext-installed="">\
-
-    <section class="scroll">
+  <body style="height: 2849px;" data-new-gr-c-s-check-loaded="14.1078.0" data-gr-ext-installed="">
+    
+  <section class="scroll">
     <div class="scroll__view" id="scrollslider" data-current="1">
       <div class="scroll__content scroll__hero is-alwayssticky">
         <div class="scroll__sectionwrapper section__hero">
@@ -446,7 +452,7 @@
           <div class="scroll__sectionwrapper">
             <div class="scroll__text">
               <h1>Ideation</h1>
-              <p>For this hackathon, we have started with the concept of combating climate change in mind. We brainstormed an idea that can be prototype and can be in relatively quick time, yet have the greatest technological inpact to solve climate change, directly from the source.</p>
+              <p>First Text Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, culpa! Labore corrupti deleniti animi velit maiores dignissimos asperiores culpa explicabo, illo dolorem! Dolor sapiente nesciunt dolorum saepe, ab fugiat ipsam?      </p>
             </div>
           </div>
         </div>
@@ -477,84 +483,12 @@
       </div>
     </div>
   </section>
-      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+  <div class="after">Content after sticky element</div>
+    
+  <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.0.2/stickyfill.min.js"></script>
-        <script id="rendered-js">
-  document.addEventListener("DOMContentLoaded", () => {
-    const scrollslider = document.getElementById("scrollslider"),
-    overlays = document.getElementById("scrolloverlays"),
-    alwaysSticky = document.querySelectorAll(".is-alwayssticky"),
-    desktopSticky = document.querySelectorAll(".is-desktopsticky");
-    let viewportHeight = window.innerHeight;
-  
-    const positionStickySupport = () => {
-      let el = document.createElement("a"),
-      mStyle = el.style;
-      mStyle.cssText =
-      "position:sticky;position:-webkit-sticky;position:-ms-sticky;";
-      return mStyle.position.indexOf("sticky") !== -1;
-    };
-  
-    if (!positionStickySupport()) {
-      // sticky polyfill for IE for always sticky elements
-      Stickyfill.add(alwaysSticky);
-      if (window.innerWidth >= 768) {
-        Stickyfill.add(desktopSticky);
-      }
-    }
-  
-    const skrollrStart = () => {
-      let elH = scrollslider.offsetHeight;
-      let winW = window.innerWidth;
-      if (
-      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent))
-  
-      {
-        scrollslider.classList.remove("no-skrollr");
-        skrollr.init({
-          forcedHeight: false,
-          constants: {
-            distance: elH / 4,
-            distance2: elH / 2,
-            distance3: elH / 4 * 3 } });
+    <script src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-32f6f4fa-d4e7-3989-0a7f-c93532faf4ee" crossorigin=""></script>
   
   
-      }
-    };
-    // these are relative to the viewport, i.e. the window
-    const mobileScrolling = () => {
-      let elOffset = overlays.getBoundingClientRect();
-      let top = Math.ceil(elOffset.top / 5) * 5;
-      let halfOfViewport = Math.ceil(Math.floor(viewportHeight / 2) / 5) * 5;
-      console.log(top, -viewportHeight, -halfOfViewport);
-      if (top > 0) {
-        scrollslider.setAttribute("data-current", 1);
-      } else if (top <= 0 && top >= -viewportHeight) {
-        scrollslider.setAttribute("data-current", 2);
-      } else if (top <= -viewportHeight && top >= -(viewportHeight * 2)) {
-        scrollslider.setAttribute("data-current", 3);
-      } else {
-        scrollslider.setAttribute("data-current", 4);
-      }
-    };
-  
-    // Fire initially
-    window.addEventListener("load", () => {
-      skrollrStart();
-    });
-  
-    // Fire on resize
-    window.addEventListener("resize", () => {
-      viewportHeight = window.innerHeight;
-      skrollrStart();
-    });
-  
-    window.addEventListener("scroll", () => {
-      mobileScrolling();
-    });
-  });
-  //# sourceURL=pen.js
-      </script></body></html>
+  </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

@@ -358,15 +358,126 @@ main .action-box-submit {
 //# sourceURL=pen.js
     </script>
 </main>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
 <style>
     article{
-        background: url('body_wallpaper.png') no-repeat fixed center;
+        background: url('website_images/body_wallpaper.png') no-repeat fixed center;
+        font-family: "Roboto Slab", sans-serif;
+        font-style: normal;
+        font-size: 20px;
         
     }
     .content-background{
         background-color: silver;
-        opacity: 0.8;
+        opacity: 0.9;
         padding:20px
+    }
+    
+    .mySlides {
+      display: none;
+    }
+
+    img {
+      vertical-align: middle;
+      height: 500px;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 2000px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Caption text */
+    .text {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    
+    /* The dots/bullets/indicators */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: lightslategray;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active{
+      background-color: white;
+    }
+  
+
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+
+    /*tab styling*/
+    .tab {
+      overflow: hidden;
+      border: none;
+    }
+
+    .tab button {
+      float: left;
+      border: none;
+      cursor: pointer;
+      background:url("website_images/dark-brown.webp");
+      padding: 14px 16px;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background:url('website_images/light-brown.jpg');
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background:url("website_images/brown-paper.jpg");
+    }
+
+    /*Display contents when a user opens a specific tab*/
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      height: 500px;
+      background-size: cover;
+      font-weight: bold;
+    }
+    /*tab description*/
+    .tab-desc{
+      background:url("website_images/brown-paper.jpg");
+    }
+    
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
     }
 </style>
 <article>
@@ -374,23 +485,192 @@ main .action-box-submit {
         <h1>Why fight climate change?</h1>
         <h2>What is climate change?</h2>
         <p>Climate change refers to the long-term shifts in temperatures and weather patterns.</p>
-        <h2>What causes climate changes?</h2>
+        <h2>What causes climate change?</h2>
         <p>Climate change are caused by human activity. Human activity has contributed to an increase of greenhouse emissions into the earth’s atmosphere. These are such as the burning of methane gases and carbon dioxide gases. <br>
         Additionally, methane also affects humans such as mood changes, slurred speech, vision problems,  memory loss, nausea, vomiting, facial flushing and headache.</p>
         <h2>Why should we reduce food wastage?</h2>
         <p>We should reduce food wastage because it results in an increase of methane being released into the air. </p>
-        <h3>How can we reducee food wastage?</h3>
-        <ul>
-            <li>Food waste can be reduced by: </li>
-                <ol>
-                    <li>Make a meal plan</li>
-                    <li>List it all down</li>
-                    <li>Donate to food banks</li>
-                    <li>Cooking up some delicious leftover recipes</li>
-                    <li>Store food items properly</li>
-                    <li>Avoid going for too much food</li>
-                </ol>
-        </ul>
+        <h3>How can we reduce food wastage? Scroll below the slides or click one of the slides to find out more of what we can do!</h3>
+        <div class="slideshow-container">
+          <div class="mySlides fade">
+            <img src="website_images/writing.jpg" onclick="gototab('#meal-plan')" style="width:100%">
+            <div class="text" style="color:black">Make a meal plan</div>
+          </div>
+          
+          <div class="mySlides fade">
+            <img id="image" src="website_images/shopping-list.jpg" onclick="gototab('#shopping-list')" style="width:100%;">
+            <div class="text" style="color:black">Craft a shopping/grocery list</div>
+          </div>
+          
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-donation.jpg" onclick="gototab('#food-banks')" style="width:100%">
+            <div class="text">Donate your food to food banks!</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/cutting_vegetables.webp" onclick="gototab('#leftover')" style="width:100%">
+            <div class="text">Using leftovers to cook up some delicious recipes!</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-in-fridge.webp" onclick="gototab('#store')" style="width:100%">
+            <div class="text" style="color:black">How you should properly store your food</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-waste.jpeg" onclick="gototab('#avoid')" style="width:100%">
+            <div class="text">Avoid going for more!</div>
+          </div>
+          
+        </div>
+        <br>
+          
+        <div style="text-align:center">
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span> 
+        </div>
+        <br>
+        <br>
+        <div class="tab">
+          <button class="tablinks" onclick="opentab(event, '#meal-plan')" id="defaultTab">Making a meal-plan</button>
+          <button class="tablinks" onclick="opentab(event, '#shopping-list')">Crafting a shopping list</button>
+          <button class="tablinks" onclick="opentab(event, '#food-banks')">Donate excess food to food banks</button>
+          <button class="tablinks" onclick="opentab(event, '#leftover')">What can you do with leftovers?</button>
+          <button class="tablinks" onclick="opentab(event, '#store')">Proper storage of food</button>
+          <button class="tablinks" onclick="opentab(event, '#avoid')">Avoid going for more</button>
+        </div>
+        <div id="meal-plan" class="tabcontent" style="background:url('website_images/writing.jpg') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>1. Making a meal plan</h2>
+            <p>Making a meal plan is important because you are able to make wiser decisions of what to eat, as well as planning what is enough for you to eat. <br>
+              What you can do is by planning your week and be realistic with how much food you need to have.</p>
+            <p>Additionally, it can also save you a lot of money too so <b>PLAN WISELY</b> before spending on food.</p>
+          </div>
+        </div>
+        <div id="shopping-list" class="tabcontent" style="background:url('website_images/shopping-list.jpg') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>2. Creating and preparing a shopping list</h2>
+            <p>Preparing a shopping list is a good way as a reminder of what food is really neccessary to stock up before heading to the supermarket to buy the stock off the shelves!</p>
+          </div>
+        </div>
+        <div id="food-banks" class="tabcontent" style="background:url('website_images/food-donation.jpg') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>3. Donating excess food to food banks </h2>
+            <p>Food banks provide avenues to donate your food waste that you do not need anymore. With this simple act, you can also help and benefit those who need it more with sufficient amount food to feed for themselves and their family <br>
+            You take your part in helping out the needy and contribute to donating food to them!</p>
+          </div>
+        </div>
+        <div id="leftover" class="tabcontent" style="background:url('website_images/cutting_vegetables.webp') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>4. Cook up some delicious leftover recipes</h2>
+            <p>Got any leftovers to spare? Well don't throw them away! <br> You can put these dishes to good use. Cook up a recipe using ingredients from your leftovers. </p>
+            <p>Even if the ingredients may not seem to be in its shape or appearance, <br> there is still a chance that those ingredients can still be used!</p>
+          </div>
+        </div>
+        <div id="store" class="tabcontent" style="background:url('website_images/food-in-fridge.webp') no-repeat center center fixed; overflow: scroll; overflow-x: hidden; background-size: 100%">
+          <div class="tab-desc">
+            <h2>5. Proper storage of food</h2>
+            <p><b>CHECK!</b> Did you store your food correctly? Here are some checks you should know and conduct for certain types of food products to improve their shelf-life:  </p>
+            <p>Here you can see a picture below of where food are stored: </p>
+          </div>
+          <img src="website_images/fridge.jpg" alt="fridge" class="center">
+          <div class="tab-desc">
+            <p>Did you know that certain types of fruits and vegetables needs to have a certain and suitable storage environment to sustain its shelf life?</p>
+            <p>Here are examples of where you should store certain kinds of fruits and vegetables: </p>
+          </div>
+            <img src="website_images/f&v-tables.png" alt="table" class="center">
+        </div>
+
+        <div id="avoid" class="tabcontent" style="background:url('website_images/food-waste.jpeg') no-repeat center center fixed; background-size: 100%;">
+          <div class="tab-desc">
+            <h2>6. Avoid going for too much food</h2>
+            <p>Lastly, planning of what amount of food is enough and sufficient for you in the long run.</p>
+            <p>Before spending on buying more food, think first if it is neccessary to buy first and whether it is enough to suit your needs. <br>
+              If it is in your plan that you do not need such a large amount of food, then you can reduce the portion of what you buy. Always make a conscious effort to serve food in smaller portions. <br>
+              Even in restaurants and if you do happen to have more than what you can finish on the table, there is never a problem to take the food back as a take-away to finish it back home.</p>
+          </div>
+        </div>
+
+        <div id="ai">
+          <h1>What is Artificial Intelligence?</h1>
+          <p>Artificial intelligence is a theory and development of computer systems to be able to perform tasks normally requiring human intelligence. </p>
+          <h2>How are we implementing Artificial Intelligence into our solution? </h2>
+          <h3>Current applications and implementations of AI technology: </h3>
+          <ul>
+            <li>Automation</li>
+            <li>Machine learning</li>
+            <li>Machine vision</li>
+            <li>Natural language processing(NLP)</li>
+            <li>Robotics</li>
+            <li>Self-driving cars</li>
+          </ul>
+          <h3>How are we implementing AI to solve our solution?</h3>
+          <p>We will leverage the use of AI to provide methods of what meals has the least carbon emissions so that our users will not spend and waste on food unneccessarily. </p>
+          <p>With this technology, less food will be wasted and the lesser amount of carbon emissions will also reduce the rate of greenhouse gases being trapped in the atmosphere and as well as minimising climate change as much as possible, with the technology of our chatbot.</p>
+          <p>Scroll down to find out more what we intend to do with our</p>
+        </div>
     </div>
+    <!-- Opening tabs function  -->
+    <script>
+    //redirects when user clicks on one of the slides and opens the tab for them
+    function gototab(redirect_id) {
+      location.replace(redirect_id);
+      opentab(event, redirect_id);
+    }
+    //sets this tab open by default when user first loads their browser
+    document.getElementById("defaultTab").click();
+    //main tab function
+    function opentab(evt, id_name) {
+      var i, tabcontent, id_name;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      let tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.querySelector(id_name).style.display = "block";
+      evt.currentTarget.className += " active";
+
+
+    }
+    </script>
+    <!-- Slide control function -->
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        let text = document.getElementsByClassName("text");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none"; 
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
+        }    
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+
+        
+       
+      }
+    </script>
 </article>
 </html>

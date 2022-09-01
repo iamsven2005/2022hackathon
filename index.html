@@ -1,629 +1,701 @@
-
-<html>
-
-<head>
-        <title>Moleskine Notebook with jQuery Booklet</title>
-
-<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-
-
-
- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
-
-
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-		<script src="jquery.easing.1.3.js" type="text/javascript"></script>
-		<script src="jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
-
-		<link href="jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
-
-
-		 <style>
-
-              *{
-	margin:0;
-	padding:0;
-}
-body{
-	background:#eba426;
-	color:#444;
-	font-size:12px;
-	color: #333;
-    font-family: 'Oswald', sans-serif;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css">
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  
+<style>
+main .messages-content .message.typing span, main .messages-content .message.typing::after, main .chat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-
-.booklet           {
-	width:900px;
-	height:607px;
-	position:relative;
-	margin:0 auto 10px;
-	-moz-box-shadow:0px 0px 1px #fff;
-	-webkit-box-shadow:0px 0px 1px #fff;
-	box-shadow:0px 0px 1px #fff;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-}
-.booklet .b-wrap-left  {
-	background:#fff url(left_bg.jpg) no-repeat top left;
-	-webkit-border-top-left-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-topleft:10px;
-	-moz-border-radius-bottomleft: 10px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-.booklet .b-wrap-right {
-	background:#efefef url(right_bg.jpg) no-repeat top left;
-	-webkit-border-top-right-radius: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	-moz-border-radius-bottomright: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-.booklet .b-counter {
-	bottom:10px;
-	position:absolute;
-	display:block;
-	width:90%;
-	height:20px;
-	border-top:1px solid #ddd;
-	color:#222;
-	text-align:center;
-	font-size:12px;
-	padding:5px 0 0;
-	background:transparent;
-	-moz-box-shadow:0px -1px 1px #fff;
-	-webkit-box-shadow:0px -1px 1px #fff;
-	box-shadow:0px -1px 1px #fff;
-	opacity:0.8;
-}
-.book_wrapper{
-	margin:0 auto;
-	padding-top:50px;
-	width:905px;
-	height:540px;
-	position:relative;
-	background:transparent url(bg.png) no-repeat 9px 27px;
-}
-.book_wrapper h1{
-	color:orange;
-	margin:5px 5px 5px 15px;
-	font-size:24px;
-	background:transparent url(h1.png) no-repeat bottom left;
-	padding-bottom:7px;
-    text-transform: uppercase;
-    font-weight: normal;
-}
-.book_wrapper p{
-	font-size:11px;
-	margin:5px 5px 5px 15px;
-}
-.book_wrapper img{
-	margin:10px 0px 5px 35px;
-	width:300px;
-	padding:4px;
-	border:1px solid #ddd;
-	-moz-box-shadow:1px 1px 1px #fff;
-	-webkit-box-shadow:1px 1px 1px #fff;
-	box-shadow:1px 1px 1px #fff;
-}
-.booklet .b-wrap-right img{
-	border:1px solid #E6E3C2;
-}
-a#next_page_button,
-a#prev_page_button{
-	display:none;
-	position:absolute;
-	width:41px;
-	height:40px;
-	cursor:pointer;
-	margin-top:-20px;
-	top:50%;
-	background:transparent url(buttons.png) no-repeat 0px -40px;
-}
-a#prev_page_button{
-	left:-30px;
-}
-a#next_page_button{
-	right:-30px;
-	background-position:-41px -40px;
-}
-a#next_page_button:hover{
-	background-position:-41px 0px;
-}
-a#prev_page_button:hover{
-	background-position:0px 0px;
-}
-table, td, th {
-  border: 2px solid black;
-  border-collapse: collapse;
-  padding: 10px;
-
+main .action-box::after, main .chat-title::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
+@keyframes ball {
+  0% {
+    margin-top: 0;
+  }
+  20% {
+    margin-top: 3px;
+  }
+  80% {
+    margin-top: -5px;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.mCSB_container {
+  margin: 0 !important;
+}
 
-         </style>
+.mCSB_scrollTools {
+  margin-right: -3px;
+}
 
-    </head>
-    <body>
-    <br><br><br><br><br>
+* {
+  outline: none;
+}
 
-		<div class="book_wrapper">
-			<a id="next_page_button"></a>
-			<a id="prev_page_button"></a>
+main, html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
 
-			<div id="mybook" style="display:none;">
-				<div class="b-load">
-					<div>
-						<img src="recipe_images/sandwich.jpg" alt=""/>
-            <h1>Breakfast - Fried Egg Sandwich (Bulking)</h1>
-            <p>Serving: 4</p>
-            <p>
-              ½ tbsp and ½ tsp butter
-              4 large eggs
-              4 slices processed American cheese
-              8 slices toasted white bread
-              salt and pepper to taste
-              2 tbsp mayonnaise
-              2 tbsp ketchup
-            </p>
-            <p>386 kcal; protein 16.6g; carbs 28.2g; fat 23g; cholest 220.6mg; Na 969.8mg</p>
+html {
+  background: #bdc3c7;
+  background: -webkit-linear-gradient(to right bottom, #bdc3c7, #2c3e50);
+  background: linear-gradient(to right bottom, #bdc3c7, #2c3e50);
+}
+
+main {
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
+  background: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+  letter-spacing: 1px;
+}
+main .chat {
+  width: 300px;
+  height: 80vh;
+  max-height: 500px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+main .chat-title {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 50px;
+}
+main .chat-title h2 {
+  margin: 10px 0;
+  padding: 0;
+  color: #f0f0f0;
+  font-weight: normal;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 30px;
+}
+main .chat-title .avatar {
+  float: left;
+  margin: 10px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+main .chat-title .avatar img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+main .messages {
+  width: 100%;
+  height: calc(100% - 90px);
+}
+main .messages-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+main .messages-content .message {
+  max-width: calc(100% - 76px);
+  padding: 8px;
+  margin: 8px 0 8px 12px;
+  border-radius: 5px;
+  background-color: rgba(170, 187, 204, 0.1);
+  color: #e3e3e3;
+  float: left;
+  font-size: 13px;
+  position: relative;
+  word-break: break-all;
+  clear: both;
+  animation: pop 0.3s forwards;
+}
+main .messages-content .message .timestamp {
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+  font-size: 12px;
+  color: #bababa;
+}
+main .messages-content .message.personal {
+  float: right;
+  margin: 8px 12px 8px 0;
+}
+main .messages-content .message.personal .timestamp {
+  right: auto;
+  left: -40px;
+}
+main .messages-content .message.typing {
+  width: 30px;
+  height: 16px;
+}
+main .messages-content .message.typing::after {
+  content: "";
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  animation: ball 1.2s infinite linear;
+}
+main .messages-content .message.typing span {
+  width: 3px;
+  height: 3px;
+  transform: translate(-50%, -50%);
+}
+main .messages-content .message.typing span::before, main .messages-content .message.typing span::after {
+  content: "";
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  position: absolute;
+  background-color: white;
+  animation: ball 1.2s infinite linear;
+}
+main .messages-content .message.typing span::before {
+  left: 8px;
+  animation-delay: 0.3s;
+}
+main .messages-content .message.typing span::after {
+  right: 8px;
+  animation-delay: -0.3s;
+}
+main .action-box {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 40px;
+}
+main .action-box-input, main .action-box-submit {
+  box-sizing: border-box;
+  border: 0;
+  float: left;
+}
+main .action-box-input {
+  width: calc(100% - 60px);
+  height: 20px;
+  background-color: transparent;
+  resize: none;
+  color: white;
+  margin: 10px 0;
+  padding: 0 10px;
+  line-height: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+main .action-box-input::-webkit-input-placeholder {
+  line-height: 20px;
+  font-size: 13px;
+}
+main .action-box-submit {
+  width: 60px;
+  height: 40px;
+  background-color: rgba(189, 195, 199, 0.2);
+  color: white;
+  cursor: pointer;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<main translate="no" data-new-gr-c-s-check-loaded="14.1077.0" data-gr-ext-installed="">
+  <div class="chat">
+  <div class="chat-title">
+    <h2>DIETBOT</h2>
+    <figure class="avatar"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/764024/profile/profile-512.jpg"></figure>
+  </div>
+  <div class="messages">
+    <div class="messages-content mCustomScrollbar _mCS_1 mCS_no_scrollbar"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div class="message">Hi there, I'm Kelly and you?<div class="timestamp">18:04</div></div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+  </div>
+  <div class="action-box">
+    <textarea class="action-box-input" type="text" placeholder="Type message..."></textarea>
+    <button class="action-box-submit" type="submit" onclick="insertMessage()"><i class="fa fa-paper-plane"></i></button>
+  </div>
+</div>
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script id="rendered-js">
+(function() {
+  // JS practice.
+  // Reference：https://codepen.io/supah/pen/jqOBqp
+  // It's Cool ! ↑
+  var fakeMsg, fakeNum, isTyping, messages, uctTimer;
+
+  messages = $(".messages-content");
+
+  fakeNum = 0;
+
+  isTyping = true;
+
+  uctTimer = null;
+
+  window.userTypingClear = function() {
+    return uctTimer = setTimeout(function() {
+      $(".message.personal.typing").remove();
+      return isTyping = true;
+    }, 3500);
+  };
+
+  window.setDate = function() {
+    var d, timestamp;
+    timestamp = $("<div>").addClass("timestamp");
+    d = new Date();
+    timestamp.text(d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes());
+    return timestamp.appendTo($('.message:last'));
+  };
+
+  window.updateScrollbar = function() {
+    return messages.mCustomScrollbar("update").mCustomScrollbar('scrollTo', 'bottom', {
+      scrollInertia: 10,
+      timeout: 0
+    });
+  };
+
+  fakeMsg = ["Hi there, I\'m DIETBOT how are    you?", "Nice to meet you", "You can find out more about us below", "Looking for a plan?", "May I introduce to you our various types?", "CUTTING, BULKING, SLIMING and HEALTHY", "We have searched and found the best recipe for you below.", "It was a pleasure chat with you, YOU CAN DO IT!", "Bye :)"];
+
+  window.setFakeMessage = function() {
+    var typing;
+    typing = $("<div>").append("<span>").addClass("message typing");
+    typing.appendTo($('.mCSB_container'));
+    updateScrollbar();
+    return setTimeout(function() {
+      var msg;
+      typing.remove();
+      msg = $("<div>").addClass("message");
+      msg.text(fakeMsg[fakeNum]);
+      msg.appendTo($('.mCSB_container'));
+      setDate();
+      updateScrollbar();
+      return fakeNum++;
+    }, 1000 + (Math.random() * 10) * 100);
+  };
+
+  window.insertMessage = function() {
+    var msg, msgText;
+    msgText = $(".action-box-input").val();
+    if ($.trim(msgText) === "") {
+      return false;
+    }
+    msg = $("<div>").addClass("message");
+    msg.text(msgText);
+    msg.addClass("personal").appendTo($('.mCSB_container'));
+    setDate();
+    updateScrollbar();
+    $(".action-box-input").val(null);
+    $(".message.personal.typing").remove();
+    isTyping = true;
+    clearTimeout(uctTimer);
+    if ($.trim(fakeMsg[fakeNum]) === "") {
+      return false;
+    }
+    return setTimeout(function() {
+      return setFakeMessage();
+    }, 500 + (Math.random() * 10) * 100);
+  };
+
+  $(window).on('keydown', function(e) {
+    if (e.which === 13) {
+      insertMessage();
+      return false;
+    }
+  });
+
+  $(window).load(function() {
+    messages.mCustomScrollbar();
+    setTimeout(function() {
+      return setFakeMessage();
+    }, 100);
+  });
+
+  $(".action-box-input").on("keydown", function(e) {
+    var typing;
+    if ($(".action-box-input") !== "" && isTyping === true && e.which !== 13) {
+      typing = $("<div>").append("<span>").addClass("message personal typing");
+      typing.appendTo($('.mCSB_container'));
+      updateScrollbar();
+      isTyping = false;
+      return userTypingClear();
+    }
+  });
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiPGFub255bW91cz4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRWU7RUFBQTs7O0FBQUEsTUFBQSxPQUFBLEVBQUEsT0FBQSxFQUFBLFFBQUEsRUFBQSxRQUFBLEVBQUE7O0VBRWYsUUFBQSxHQUFXLENBQUEsQ0FBRSxtQkFBRjs7RUFDWCxPQUFBLEdBQVU7O0VBRVYsUUFBQSxHQUFXOztFQUNYLFFBQUEsR0FBVzs7RUFFWCxNQUFNLENBQUMsZUFBUCxHQUF5QixRQUFBLENBQUEsQ0FBQTtXQUN4QixRQUFBLEdBQVcsVUFBQSxDQUFXLFFBQUEsQ0FBQSxDQUFBO01BQ3JCLENBQUEsQ0FBRSwwQkFBRixDQUE2QixDQUFDLE1BQTlCLENBQUE7YUFDQSxRQUFBLEdBQVc7SUFGVSxDQUFYLEVBR1QsSUFIUztFQURhOztFQU16QixNQUFNLENBQUMsT0FBUCxHQUFpQixRQUFBLENBQUEsQ0FBQTtBQUNqQixRQUFBLENBQUEsRUFBQTtJQUFDLFNBQUEsR0FBWSxDQUFBLENBQUUsT0FBRixDQUFVLENBQUMsUUFBWCxDQUFvQixXQUFwQjtJQUNaLENBQUEsR0FBSSxJQUFJLElBQUosQ0FBQTtJQUNKLFNBQVMsQ0FBQyxJQUFWLENBQWUsQ0FBQyxDQUFDLFFBQUYsQ0FBQSxDQUFBLEdBQWUsR0FBZixHQUFxQixDQUFJLENBQUMsQ0FBQyxVQUFGLENBQUEsQ0FBQSxHQUFpQixFQUFwQixHQUE0QixHQUE1QixHQUFxQyxFQUF0QyxDQUFyQixHQUFpRSxDQUFDLENBQUMsVUFBRixDQUFBLENBQWhGO1dBQ0EsU0FBUyxDQUFDLFFBQVYsQ0FBbUIsQ0FBQSxDQUFFLGVBQUYsQ0FBbkI7RUFKZ0I7O0VBTWpCLE1BQU0sQ0FBQyxlQUFQLEdBQXlCLFFBQUEsQ0FBQSxDQUFBO1dBQ3ZCLFFBQVEsQ0FBQyxnQkFBVCxDQUEwQixRQUExQixDQUFtQyxDQUFDLGdCQUFwQyxDQUFxRCxVQUFyRCxFQUFpRSxRQUFqRSxFQUNFO01BQUEsYUFBQSxFQUFlLEVBQWY7TUFDQSxPQUFBLEVBQVM7SUFEVCxDQURGO0VBRHVCOztFQUt6QixPQUFBLEdBQVUsQ0FDVCwrQkFEUyxFQUVULGtCQUZTLEVBR1Qsb0JBSFMsRUFJVCxhQUpTLEVBS1QsZ0NBTFMsRUFNVCwyQkFOUyxFQU9ULG9CQVBTLEVBUVQsaUNBUlMsRUFTVCxRQVRTOztFQVlWLE1BQU0sQ0FBQyxjQUFQLEdBQXdCLFFBQUEsQ0FBQSxDQUFBO0FBQ3hCLFFBQUE7SUFBQyxNQUFBLEdBQVMsQ0FBQSxDQUFFLE9BQUYsQ0FBVSxDQUFDLE1BQVgsQ0FBa0IsUUFBbEIsQ0FBMkIsQ0FBQyxRQUE1QixDQUFxQyxnQkFBckM7SUFDVCxNQUFNLENBQUMsUUFBUCxDQUFnQixDQUFBLENBQUUsaUJBQUYsQ0FBaEI7SUFDQSxlQUFBLENBQUE7V0FDQSxVQUFBLENBQVcsUUFBQSxDQUFBLENBQUE7QUFDWixVQUFBO01BQUUsTUFBTSxDQUFDLE1BQVAsQ0FBQTtNQUNBLEdBQUEsR0FBTSxDQUFBLENBQUUsT0FBRixDQUFVLENBQUMsUUFBWCxDQUFvQixTQUFwQjtNQUNOLEdBQUcsQ0FBQyxJQUFKLENBQVMsT0FBTyxDQUFDLE9BQUQsQ0FBaEI7TUFDQSxHQUFHLENBQUMsUUFBSixDQUFhLENBQUEsQ0FBRSxpQkFBRixDQUFiO01BQ0EsT0FBQSxDQUFBO01BQ0EsZUFBQSxDQUFBO2FBQ0EsT0FBQTtJQVBVLENBQVgsRUFRRSxJQUFBLEdBQU8sQ0FBQyxJQUFJLENBQUMsTUFBTCxDQUFBLENBQUEsR0FBZ0IsRUFBakIsQ0FBQSxHQUF1QixHQVJoQztFQUp1Qjs7RUFjeEIsTUFBTSxDQUFDLGFBQVAsR0FBdUIsUUFBQSxDQUFBLENBQUE7QUFDdkIsUUFBQSxHQUFBLEVBQUE7SUFBQyxPQUFBLEdBQVcsQ0FBQSxDQUFFLG1CQUFGLENBQXNCLENBQUMsR0FBdkIsQ0FBQTtJQUNYLElBQUcsQ0FBQyxDQUFDLElBQUYsQ0FBTyxPQUFQLENBQUEsS0FBbUIsRUFBdEI7QUFDQyxhQUFPLE1BRFI7O0lBRUEsR0FBQSxHQUFNLENBQUEsQ0FBRSxPQUFGLENBQVUsQ0FBQyxRQUFYLENBQW9CLFNBQXBCO0lBQ04sR0FBRyxDQUFDLElBQUosQ0FBUyxPQUFUO0lBQ0EsR0FBRyxDQUFDLFFBQUosQ0FBYSxVQUFiLENBQXdCLENBQUMsUUFBekIsQ0FBa0MsQ0FBQSxDQUFFLGlCQUFGLENBQWxDO0lBQ0EsT0FBQSxDQUFBO0lBQ0EsZUFBQSxDQUFBO0lBQ0EsQ0FBQSxDQUFFLG1CQUFGLENBQXNCLENBQUMsR0FBdkIsQ0FBMkIsSUFBM0I7SUFFQSxDQUFBLENBQUUsMEJBQUYsQ0FBNkIsQ0FBQyxNQUE5QixDQUFBO0lBQ0EsUUFBQSxHQUFXO0lBQ1gsWUFBQSxDQUFhLFFBQWI7SUFFQSxJQUFHLENBQUMsQ0FBQyxJQUFGLENBQU8sT0FBTyxDQUFDLE9BQUQsQ0FBZCxDQUFBLEtBQTRCLEVBQS9CO0FBQ0MsYUFBTyxNQURSOztXQUVBLFVBQUEsQ0FBVyxRQUFBLENBQUEsQ0FBQTthQUNWLGNBQUEsQ0FBQTtJQURVLENBQVgsRUFFRSxHQUFBLEdBQU0sQ0FBQyxJQUFJLENBQUMsTUFBTCxDQUFBLENBQUEsR0FBZ0IsRUFBakIsQ0FBQSxHQUF1QixHQUYvQjtFQWpCc0I7O0VBcUJ2QixDQUFBLENBQUUsTUFBRixDQUFTLENBQUMsRUFBVixDQUFhLFNBQWIsRUFBd0IsUUFBQSxDQUFDLENBQUQsQ0FBQTtJQUN0QixJQUFJLENBQUMsQ0FBQyxLQUFGLEtBQVcsRUFBZjtNQUNFLGFBQUEsQ0FBQTtBQUNBLGFBQU8sTUFGVDs7RUFEc0IsQ0FBeEI7O0VBS0EsQ0FBQSxDQUFFLE1BQUYsQ0FBUyxDQUFDLElBQVYsQ0FBZSxRQUFBLENBQUEsQ0FBQTtJQUNkLFFBQVEsQ0FBQyxnQkFBVCxDQUFBO0lBQ0EsVUFBQSxDQUFXLFFBQUEsQ0FBQSxDQUFBO2FBQ1YsY0FBQSxDQUFBO0lBRFUsQ0FBWCxFQUVFLEdBRkY7RUFGYyxDQUFmOztFQU9BLENBQUEsQ0FBRSxtQkFBRixDQUFzQixDQUFDLEVBQXZCLENBQTBCLFNBQTFCLEVBQXFDLFFBQUEsQ0FBQyxDQUFELENBQUE7QUFDckMsUUFBQTtJQUFDLElBQUcsQ0FBQSxDQUFFLG1CQUFGLENBQUEsS0FBMEIsRUFBMUIsSUFBZ0MsUUFBQSxLQUFZLElBQTVDLElBQW9ELENBQUMsQ0FBQyxLQUFGLEtBQVcsRUFBbEU7TUFDQyxNQUFBLEdBQVMsQ0FBQSxDQUFFLE9BQUYsQ0FBVSxDQUFDLE1BQVgsQ0FBa0IsUUFBbEIsQ0FBMkIsQ0FBQyxRQUE1QixDQUFxQyx5QkFBckM7TUFDVCxNQUFNLENBQUMsUUFBUCxDQUFnQixDQUFBLENBQUUsaUJBQUYsQ0FBaEI7TUFDQSxlQUFBLENBQUE7TUFDQSxRQUFBLEdBQVc7YUFDWCxlQUFBLENBQUEsRUFMRDs7RUFEb0MsQ0FBckM7QUFwRmUiLCJzb3VyY2VzQ29udGVudCI6WyIjIEpTIHByYWN0aWNlLlxuIyBSZWZlcmVuY2XvvJpodHRwczovL2NvZGVwZW4uaW8vc3VwYWgvcGVuL2pxT0JxcFxuIyBJdCdzIENvb2wgISDihpFcblxubWVzc2FnZXMgPSAkKFwiLm1lc3NhZ2VzLWNvbnRlbnRcIilcbmZha2VOdW0gPSAwXG5cbmlzVHlwaW5nID0gdHJ1ZVxudWN0VGltZXIgPSBudWxsXG5cbndpbmRvdy51c2VyVHlwaW5nQ2xlYXIgPSAtPlxuXHR1Y3RUaW1lciA9IHNldFRpbWVvdXQgLT5cblx0XHQkKFwiLm1lc3NhZ2UucGVyc29uYWwudHlwaW5nXCIpLnJlbW92ZSgpXG5cdFx0aXNUeXBpbmcgPSB0cnVlXG5cdCwgMzUwMFxuXG53aW5kb3cuc2V0RGF0ZSA9IC0+XG5cdHRpbWVzdGFtcCA9ICQoXCI8ZGl2PlwiKS5hZGRDbGFzcyBcInRpbWVzdGFtcFwiXG5cdGQgPSBuZXcgRGF0ZSgpXG5cdHRpbWVzdGFtcC50ZXh0IGQuZ2V0SG91cnMoKSArIFwiOlwiICsgKGlmIGQuZ2V0TWludXRlcygpIDwgMTAgdGhlbiAnMCcgZWxzZSAnJykgKyBkLmdldE1pbnV0ZXMoKVxuXHR0aW1lc3RhbXAuYXBwZW5kVG8gJCgnLm1lc3NhZ2U6bGFzdCcpXG5cbndpbmRvdy51cGRhdGVTY3JvbGxiYXIgPSAtPlxuICBtZXNzYWdlcy5tQ3VzdG9tU2Nyb2xsYmFyKFwidXBkYXRlXCIpLm1DdXN0b21TY3JvbGxiYXIgJ3Njcm9sbFRvJywgJ2JvdHRvbScsIFxuICAgIHNjcm9sbEluZXJ0aWE6IDEwXG4gICAgdGltZW91dDogMFxuXHRcbmZha2VNc2cgPSBbXG5cdFwiSGkgdGhlcmUsIElcXCdtIEtlbGx5IGFuZCB5b3U/XCJcblx0XCJOaWNlIHRvIG1lZXQgeW91XCJcblx0XCJIb3cgYXJlIHlvdSBkb2luZz9cIlxuXHRcIlByZXR0eSBnb29kXCJcblx0XCJIb3dcXCdzIGxpZmUgYmVlbiB0cmVhdGluZyB5b3U/XCJcblx0XCJJdCBjb3VsZCBiZSB3b3JzZSwgdGhhbmtzXCJcblx0XCJJXFwndmUgZ290dGEgZ28gbm93XCJcblx0XCJJdCB3YXMgYSBwbGVhc3VyZSBjaGF0IHdpdGggeW91XCJcblx0XCJCeWUgOilcIlxuXVxuICBcbndpbmRvdy5zZXRGYWtlTWVzc2FnZSA9IC0+XG5cdHR5cGluZyA9ICQoXCI8ZGl2PlwiKS5hcHBlbmQoXCI8c3Bhbj5cIikuYWRkQ2xhc3MgXCJtZXNzYWdlIHR5cGluZ1wiXG5cdHR5cGluZy5hcHBlbmRUbyAkKCcubUNTQl9jb250YWluZXInKVxuXHR1cGRhdGVTY3JvbGxiYXIoKVxuXHRzZXRUaW1lb3V0IC0+XG5cdFx0dHlwaW5nLnJlbW92ZSgpXG5cdFx0bXNnID0gJChcIjxkaXY+XCIpLmFkZENsYXNzIFwibWVzc2FnZVwiXG5cdFx0bXNnLnRleHQgZmFrZU1zZ1tmYWtlTnVtXVxuXHRcdG1zZy5hcHBlbmRUbyAkKCcubUNTQl9jb250YWluZXInKVxuXHRcdHNldERhdGUoKVxuXHRcdHVwZGF0ZVNjcm9sbGJhcigpXG5cdFx0ZmFrZU51bSsrXG5cdCwgMTAwMCArIChNYXRoLnJhbmRvbSgpICogMTApICogMTAwXG5cbndpbmRvdy5pbnNlcnRNZXNzYWdlID0gLT5cblx0bXNnVGV4dCA9ICAkKFwiLmFjdGlvbi1ib3gtaW5wdXRcIikudmFsKClcblx0aWYgJC50cmltKG1zZ1RleHQpID09IFwiXCJcblx0XHRyZXR1cm4gZmFsc2Vcblx0bXNnID0gJChcIjxkaXY+XCIpLmFkZENsYXNzIFwibWVzc2FnZVwiXG5cdG1zZy50ZXh0IG1zZ1RleHRcblx0bXNnLmFkZENsYXNzKFwicGVyc29uYWxcIikuYXBwZW5kVG8gJCgnLm1DU0JfY29udGFpbmVyJylcblx0c2V0RGF0ZSgpXG5cdHVwZGF0ZVNjcm9sbGJhcigpXG5cdCQoXCIuYWN0aW9uLWJveC1pbnB1dFwiKS52YWwobnVsbClcblx0XG5cdCQoXCIubWVzc2FnZS5wZXJzb25hbC50eXBpbmdcIikucmVtb3ZlKClcblx0aXNUeXBpbmcgPSB0cnVlXG5cdGNsZWFyVGltZW91dCB1Y3RUaW1lclxuXHRcblx0aWYgJC50cmltKGZha2VNc2dbZmFrZU51bV0pID09IFwiXCJcblx0XHRyZXR1cm4gZmFsc2Vcblx0c2V0VGltZW91dCAtPlxuXHRcdHNldEZha2VNZXNzYWdlKClcblx0LCA1MDAgKyAoTWF0aC5yYW5kb20oKSAqIDEwKSAqIDEwMFxuXG4kKHdpbmRvdykub24gJ2tleWRvd24nLCAoZSkgLT5cbiAgaWYgKGUud2hpY2ggPT0gMTMpIFxuICAgIGluc2VydE1lc3NhZ2UoKVxuICAgIHJldHVybiBmYWxzZVxuXG4kKHdpbmRvdykubG9hZCAtPlxuXHRtZXNzYWdlcy5tQ3VzdG9tU2Nyb2xsYmFyKClcblx0c2V0VGltZW91dCAtPlxuXHRcdHNldEZha2VNZXNzYWdlKClcblx0LCAxMDBcblx0cmV0dXJuXG5cdFxuJChcIi5hY3Rpb24tYm94LWlucHV0XCIpLm9uIFwia2V5ZG93blwiLCAoZSkgLT5cblx0aWYgJChcIi5hY3Rpb24tYm94LWlucHV0XCIpICE9IFwiXCIgJiYgaXNUeXBpbmcgPT0gdHJ1ZSAmJiBlLndoaWNoICE9IDEzXG5cdFx0dHlwaW5nID0gJChcIjxkaXY+XCIpLmFwcGVuZChcIjxzcGFuPlwiKS5hZGRDbGFzcyBcIm1lc3NhZ2UgcGVyc29uYWwgdHlwaW5nXCJcblx0XHR0eXBpbmcuYXBwZW5kVG8gJCgnLm1DU0JfY29udGFpbmVyJylcblx0XHR1cGRhdGVTY3JvbGxiYXIoKVxuXHRcdGlzVHlwaW5nID0gZmFsc2Vcblx0XHR1c2VyVHlwaW5nQ2xlYXIoKVxuXG4iXX0=
+//# sourceURL=coffeescript
+//# sourceURL=pen.js
+    </script>
+</main>
+
+<iframe width="100%" height="720" src="recipe.html"frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+<style>
+    article{
+        background: url('website_images/body_wallpaper.png') no-repeat fixed center;
+        font-family: "Roboto Slab", sans-serif;
+        font-style: normal;
+        font-size: 20px;
+        
+    }
+    .content-background{
+        background-color: silver;
+        opacity: 0.9;
+        padding:20px
+    }
+    
+    .mySlides {
+      display: none;
+    }
+
+    img {
+      vertical-align: middle;
+      height: 500px;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 2000px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Caption text */
+    .text {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+    
+    /* The dots/bullets/indicators */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: lightslategray;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active{
+      background-color: white;
+    }
+  
+
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+
+    /*tab styling*/
+    .tab {
+      overflow: hidden;
+      border: none;
+    }
+
+    .tab button {
+      float: left;
+      border: 1px solid rgba(0,0,0,0.75);
+      cursor: pointer;
+      background:url("website_images/mid-brown.webp");
+      color:white;
+      padding: 14px 16px;
+      border-radius: 10px 10px 0 0;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background:url('website_images/light-brown.jpg');
+      color:grey;
+      border:none;
+      padding: 15px 16px;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background:url("website_images/brown-paper.jpg");
+      color:black;
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
+      margin-right:5px;
+      border:none;
+      padding: 20px 16px;
+      
+    }
+
+    /*Display contents when a user opens a specific tab*/
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 5px solid transparent;
+      border-image: url("website_images/brown-paper.jpg") 30 stretch;
+      height: 500px;
+      background-size: 100%;
+      font-weight: bold;
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+    /*tab description*/
+    .tab-desc{
+      background:url("website_images/brown-paper.jpg");
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
+    }
+    
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+</style>
+<article>
+    <div class="content-background">
+        <h1>Why fight climate change?</h1>
+        <h2>What is climate change?</h2>
+        <p>Climate change refers to the long-term shifts in temperatures and weather patterns.</p>
+        <h2>What causes climate change?</h2>
+        <p>Climate change are caused by human activity. Human activity has contributed to an increase of greenhouse emissions into the earth’s atmosphere. These are such as the burning of methane gases and carbon dioxide gases. <br>
+        Additionally, methane also affects humans such as mood changes, slurred speech, vision problems,  memory loss, nausea, vomiting, facial flushing and headache.</p>
+        <h2>Why should we reduce food wastage?</h2>
+        <p>We should reduce food wastage because it results in an increase of methane being released into the air. </p>
+        <h3>How can we reduce food wastage? Scroll below the slides or click one of the slides to find out more of what we can do!</h3>
+        <div class="slideshow-container">
+          <div class="mySlides fade">
+            <img src="website_images/writing.jpg" onclick="gototab('#meal-plan',0)" style="width:100%">
+            <div class="text" style="color:black">Make a meal plan</div>
           </div>
-					<div>
-            <img src="recipe_images/chickenrice.jpg" alt="" />
-            <h1>Lunch - Chicken and Rice (Bulking)</h1>
-            <p>
-              100g chicken breast
-              2 tsp Chinese 5 spice
-              150g mixed frozen vegetables
-              200g pre-cooked rice
-              2 beaten eggs
-            </p>
-            <p>576 kcal; 43g protein; 68g carbs; 9g fat (2g saturated)</p>
+          
+          <div class="mySlides fade">
+            <img id="image" src="website_images/shopping-list.png" onclick="gototab('#shopping-list',1)" style="width:100%;">
+            <div class="text" style="color:black">Craft a shopping/grocery list</div>
           </div>
-					<div>
-            <img src="recipe_images/burger.jpg" alt="" />
-            <h1>Dinner - Green Chili Turkey Burgers (Bulking)</h1>
-            <p>
-              2 (4 oz.) cans diced green chile
-              1 pound ground turkey
-              1 cup cilantro, finely chopped
-              ½ cup onion, finely chopped
-              2 tsp cumin
-              1 tsp chili powder
-              1 tsp celtic sea salt
-            </p>
-            <p>610 kcal; 54g protein; 68g carbs; 5g fat</p>
-					</div>
-					<div>
-            <img src="recipe_images/waffles.jpg" alt="" />
-            <h1>Breakfast - Maple Cinnamon Sweet Potato Waffles (Cutting)</h1>
-            <p>Servings: 5</p>
-            <p>
-              ¾ cup Trifecta Sweet Potatoes
-              ½ cup greek yogurt, cottage cheese or dairy-free yogurt alternative
-              2 large eggs
-              1 tbsp maple syrup
-              1 tsp vanilla extract
-              1 cup all-purpose flour or gluten-free rolled oats
-              1 tsp baking powder
-              1 tsp ground cinnamon
-              ½ tsp ground nutmeg
-              ½ tsp ground ginger
-            </p>
-            <p>Total Fat 3g
-              4%
-              Cholest 100mg
-              33%
-              Na 55mg
-              2%
-              Total Carbs 31g
-              10%
-              Sugars 5g
-              Protein 8g
-              Vit A 340
-              Vit C 6
-            </p>
-					</div>
-					<div>
-            <img src="recipe_images/salmonsalad.jpg" alt="" />
-            <h1>Lunch - Salmon Salad (Cutting)</h1>
-            <p>Servings: 4</p>
-            <p>
-              16 oz Trifecta salmon
-              8 cups butter lettuce
-              8 slices turkey bacon
-              20 cherry tomatoes
-              1 medium avocado
-              1 small shallot
-              1 tbsp olive oil
-              Juice and zest of 1 lemon
-              1 tsp dijon mustard
-              ½ tsp salt
-              pepper to taste
-            </p>
-            <p>Total Fat 23g
-              35%
-              Cholest 25mg
-              10%
-              Na 720mg
-              30%
-              Total Carbs 12g
-              5%
-              Sugars 5g
-              Protein 30g
-              Vit A
-              89%
-              Vit C
-              55%
-            </p>
-					</div>
-					<div>
-            <img src="recipe_images/beefbowl.jpg" alt="" />
-            <h1>Dinner - Loaded Mediterranean Beef Bowl (Cutting)</h1>
-            <p>Servings: 4</p>
-            <p>
-              16 ounce Trifecta beef patties, crumbled
-              1 ⅓ cup Trifecta quinoa
-              4 tbsp hummus, any flavor, store-bought
-              1 cup sliced cucumber, deseeded, seasoned (see the method of preparation)
-              1 cup cherry tomatoes, halved
-              Garnish (optional):
-              Parsley leaves, fresh chopped dill, feta cheese, red pepper flake
-            </p>
-            <p>Total Fat 16g
-              21%
-              Cholest 100mg
-              33%
-              Na 300mg
-              13%
-              Total Carbs 20g
-              7%
-              Sugars 4g
-              Protein 37g
-              Vit A
-              Vit C</p>
-					</div>
-					<div>
-						<img src="recipe_images/Breakfast1.jpg" alt="" />
-						<h1>Breakfast - Chocolate-Raspberry Oatmeal (slimming)</h1>
-            <p> Servings for 4</p>
-						<p>
-              1 ½ cups regular rolled oats
-              2 tbsp unsweetened cocoa powder
-              ¼ tsp salt
-              3 cups unsweetened almond milk
-              1 cup fresh red raspberries
-              4 tsp sugar-free chocolate-flavor syrup (Optional)
-            </p>
-            <p>Per Serving (4) :157 kcal; protein 5.4g; carbs 26.2g; fat 4.7; sodium 281.2mg.</p>
-					</div>
-					<div>
-						<img src="recipe_images/Lunch1.jpg" alt="" />
-						<h1>Lunch - Ginger chicken&green bean noodles (Slimming)</h1>
-            <p> Servings:2</p>
-						<p>
-              ½ tbsp vegetable oil
-              2 skinless chicken breasts, sliced
-              200g green beans, trimmed & halved crosswise
-              thumb-sized piece of ginger, peeled & cut into matchsticks
-              2 garlic cloves, sliced
-              1 ball stem ginger, finely sliced + 1 tsp syrup
-              1 tsp cornflour, mixed with 1 tbsp water
-              1 tsp dark soy sauce + extra to serve (optional)
-              2 tsp rice vinegar
-              200g cooked egg noodles
-            </p>
-            <p>Per Serving (2) : 213 kcal; fat 4g; saturates 0g; carbs 24g; sugars 5g; fibre 3g; protein 19g; Na 0.4g</p>
-					</div>
-					<div>
-						<img src="recipe_images/Dinner1.jpg" alt="" />
-            <h1>Dinner - Vegan Spinach and Sun-Dried Tomato Pasta (Slimming)</h1>
-            <p> Servings:4</p>
-						<p>
-              8 oz linguine noodles (sub your favorite noodles or Gluten Free if needed)
-              1 tbsp olive oil
-              ⅓ cup sun-dried tomatoes, chopped small
-              3 cloves garlic, minced
-              1 cup canned coconut cream
-              1'4 tsp paprika
-              ½ tsp salt
-              ⅛ tsp chili powder
-              ½ cup vegan parmesan cheese, grated
-              2 cups fresh spinach leaves, packed
-              5 fresh basil leaves, finely chopped
-            </p>
-            <p>Per Serving (4) : 471 kcal; protein 11g; carbs 53g; fat 26g; Na 333mg; K 728mg; fiber 5g.</p>
-					</div>
-					<div>
-						<img src="recipe_images/Breakfast2.jpg" alt="" />
-						<h1>Breakfast-Banana Bread French Toast (Healthy)</h1>
-            <p> Servings:8</p>
-						<p>
-              4 large eggs
-              ¾ cup low-fat milk
-              1 tsp vanilla extract
-              ¼ tsp ground cinnamon
-              8 slices banana bread, about 1 inch thick
-              2 tbsp butter, divided
-              Toasted chopped walnuts, sliced banana & pure maple syrup for topping
-            </p>
-            <p>Per Serving (8) : 294 kcal; protein 8.6g; carbs 40.8g; fiber 3.2g; sugars 21.1g; fat 11.4g; chol 151.9mg; sodium 311.1mg.</p>
-					</div>
-					<div>
-						<img src="recipe_images/Lunch2.jpg" alt="" />
-						<h1>Lunch-Instant Pot Beef Curry (Healthy)</h1>
-            <p> Servings:8</p>
-						<p>
-              2 tbsp canola oil, divided
-              1 red onion, sliced ¼ inch thick
-              1 large red pepper, quartered lengthwise, then sliced crosswise
-              Kosher salt & pepper
-              1 2-lb beef chuck roast, well trimmed & cut into 3-inch pieces
-              1 14.5-oz can coconut milk, well shaken
-              3 tbsp. Thai red curry paste
-              Cooked rice, lime wedges, cilantro & sliced red chile, for serving
-            </p>
-            <p>Per Serving (6) : About 400 kcal, 26g fat (15.5g saturated), 35g protein, 480mg sodium, 7g carb, 1g fiber</p>
-					</div>
-					<div>
-						<img src="recipe_images/Dinner2.jpg" alt="" />
-						<h1>Dinner-Creamy Chicken & Mushrooms (Healthy)</h1>
-            <p> Servings:4</p>
-						<p>
-              4 4- to 5-ounce chicken cutlets
-              4 cups mixed mushrooms, sliced if large
-              ½ cup dry white wine
-              ½ cup heavy cream
-              2 tablespoons finely chopped fresh parsley
-            </p>
-            <p>Per Serving (4) :  325 kcal; protein 29.1g; carbs 4.2g; fiber 0.8g; sugars 2.5g; fat 19.6g; chol 98.9mg; sodium 329.2mg.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-    <table>
+          
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-donation.jpg" onclick="gototab('#food-banks',2)" style="width:100%">
+            <div class="text">Donate your food to food banks!</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/cutting_vegetables.webp" onclick="gototab('#leftover',3)" style="width:100%">
+            <div class="text">Using leftovers to cook up some delicious recipes!</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-in-fridge.webp" onclick="gototab('#store',4)" style="width:100%">
+            <div class="text" style="color:black">How you should properly store your food</div>
+          </div>
+          <div class="mySlides fade">
+            <img id="image" src="website_images/food-waste.jpeg" onclick="gototab('#avoid',5)" style="width:100%">
+            <div class="text">Avoid going for more!</div>
+          </div>
+          
+        </div>
+        <br>
+          
+        <div style="text-align:center">
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span> 
+        </div>
+        <br>
+        <br>
+        <div class="tab">
+          <button class="tablinks" onclick="opentab(event, '#meal-plan')" id="defaultTab">Making a meal-plan</button>
+          <button class="tablinks" onclick="opentab(event, '#shopping-list')">Crafting a shopping list</button>
+          <button class="tablinks" onclick="opentab(event, '#food-banks')">Donate excess food to food banks</button>
+          <button class="tablinks" onclick="opentab(event, '#leftover')">What can you do with leftovers?</button>
+          <button class="tablinks" onclick="opentab(event, '#store')">Proper storage of food</button>
+          <button class="tablinks" onclick="opentab(event, '#avoid')">Avoid going for more</button>
+        </div>
+        <div id="meal-plan" class="tabcontent" style="background:url('website_images/writing.jpg') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>1. Making a meal plan</h2>
+            <p>Making a meal plan is important because you are able to make wiser decisions of what to eat, as well as planning what is enough for you to eat. <br>
+              What you can do is by planning your week and be realistic with how much food you need to have.</p>
+            <p>Additionally, it can also save you a lot of money too so <b>PLAN WISELY</b> before spending on food.</p>
+          </div>
+        </div>
+        <div id="shopping-list" class="tabcontent" style="background:url('website_images/shopping-list.png') no-repeat center top fixed;">
+          <div class="tab-desc">
+            <h2>2. Creating and preparing a shopping list</h2>
+            <p>Preparing a shopping list is a good way as a reminder of what food is really neccessary to stock up before heading to the supermarket to buy the stock off the shelves!</p>
+          </div>
+        </div>
+        <div id="food-banks" class="tabcontent" style="background:url('website_images/food-donation.jpg') no-repeat center center fixed">
+          <div class="tab-desc">
+            <h2>3. Donating excess food to food banks </h2>
+            <p>Food banks provide avenues to donate your food waste that you do not need anymore. With this simple act, you can also help and benefit those who need it more with sufficient amount food to feed for themselves and their family <br>
+            You take your part in helping out the needy and contribute to donating food to them!</p>
+          </div>
+        </div>
+        <div id="leftover" class="tabcontent" style="background:url('website_images/cutting_vegetables.webp') no-repeat center center fixed; background-size: 100%">
+          <div class="tab-desc">
+            <h2>4. Cook up some delicious leftover recipes</h2>
+            <p>Got any leftovers to spare? Well don't throw them away! <br> You can put these dishes to good use. Cook up a recipe using ingredients from your leftovers. </p>
+            <p>Even if the ingredients may not seem to be in its shape or appearance, <br> there is still a chance that those ingredients can still be used!</p>
+          </div>
+        </div>
+        <div id="store" class="tabcontent" style="background:url('website_images/food-in-fridge.webp') no-repeat center center fixed; overflow: scroll; overflow-x: hidden; background-size: 100%">
+          <div class="tab-desc">
+            <h2>5. Proper storage of food</h2>
+            <p><b>CHECK!</b> Did you store your food correctly? Here are some checks you should know and conduct for certain types of food products to improve their shelf-life:  </p>
+            <p>Here you can see a picture below of where food are stored: </p>
+          </div>
+          <img src="website_images/fridge.jpg" alt="fridge" class="center">
+          <div class="tab-desc">
+            <p>Did you know that certain types of fruits and vegetables needs to have a certain and suitable storage environment to sustain its shelf life?</p>
+            <p>Here are examples of where you should store certain kinds of fruits and vegetables: </p>
+          </div>
+            <img src="website_images/f&v-tables.png" alt="table" class="center">
+        </div>
 
-      <tr>
-        <th>Diet type</th>
-        <th>Meal Name</th>
-        <th>Recipe Steps</th>
-      </tr>
-      <tr>
-        <td>Bulk</td>
-        <td>Breakfast - Fried Egg Sandwich</td>
-        <td>
-            Step 1 : Melt butter over medium-high heat in a large skillet. Crack eggs into the pan and cook to desired firmness. Just before eggs are cooked, place a slice of cheese over each egg; continue to cook until cheese has melted.
-       <br/>
-            Step 2 : Transfer each egg to a toasted slice of bread. Season eggs with salt and pepper. Spread mayonnaise and ketchup on remaining slices of bread and cover eggs with bread to make 4 sandwiches. Serve warm.
-        </td>
-      </tr>
-      <tr>
-        <td>Bulk</td>
-        <td>Lunch - Chicken and Rice</td>
-        <td>
-            Step 1 : Cook rice in rice cooker and slice the chicken and toss in the spices
-        <br/>
-            Step 2 : Stir fry for 3-4min
-        <br/>
-            Step 3 : Meanwhile, boil the veg until it’s cooked, but with a little bite.
-        <br/>
-            Step 4 : Add rice and the chicken into the pan with the egg. Stir until the eggs scramble, then add the vegetables last.
-        </td>
-      </tr>
-      <tr>
-        <td>Bulk</td>
-        <td> Dinner - Green Chili Turkey Burgers</td>
-        <td>
-             Step 1 : In a medium sized bowl mix diced chiles with turkey, cilantro, onion, cumin, chili powder and salt
-         <br/>
-             Step 2 : Form into burgers and grill
-         <br/>
-             Step 3 : Serve
-        </td>
-      </tr>
-      <tr>
-        <td>Cut</td>
-        <td>Breakfast - Maple Cinnamon Sweet Potato Waffles</td>
-        <td>
-            Step 1 : Combine all of the ingredients together in a blender and blend until smooth. Set aside while the waffle maker preheats.
-        <br/>
-            Step 2 : Generously spray the waffle maker with non-stick spray then measure 1/2 cup amount of batter into each space. Close Lid and cook for 4-5 minutes until done.
-        </td>
-      </tr>
-      <tr>
-        <td>Cut</td>
-        <td>Lunch - Salmon Salad</td>
-        <td>
-            Step 1 : Mince shallot and zest lemon.
-        <br/>
-            Step 2 : In a small bowl mix lemon zest, lemon juice, shallot, and dijon mustard. Whisk in olive oil until smooth. Season with salt and pepper to taste and set aside.
-        <br/>
-            Step 3 : Wash and chop lettuce and tomatoes. Set aside.
-        <br/>
-            Step 4 : Cook bacon until crispy and let cool. Once cooled, chop into bite-sized pieces.
-        <br/>
-            Step 5 : Peel and cube avocado.
-        <br/>
-            Step 6 : Divide ingredients into four portions and toss together lettuce, tomato, bacon, and avocado.
-        <br/>
-            Step 7 : Pan sear or warm salmon in the oven for a few minutes.
-        <br/>
-            Step 8 : Toss salad greens in dressing and top with warmed salmon.
-        </td>
-      </tr>
-      <tr>
-        <td>Cut</td>
-        <td>Dinner - Loaded Mediterranean Beef Bowl</td>
-        <td>
-            Step 1 : Make the greek yogurt sauce by combining ingredients in a bowl. Season with salt and taste. Adjust as needed. Transfer to a squeeze bottle if you have one. It will make the plating that much prettier.
-        <br/>
-            Step 2 : Slice cucumbers into half-moons by slicing cut lengthwise and scooping all seeds out with a spoon. Discard seeds. Slice into even half-moons and transfer to a bowl. You can use a mandolin to make this process faster if you have one. Mix
-            Trifecta cherry tomatoes with the cucumbers in the same bowl.
-        <br/>
-            Step 3 : Season cucumbers-tomato mix with a splash of lime juice, olive oil, and salt. Taste for seasoning and adjust as needed. Keep on the side until plating time
-        <br/>
-            Step 4 : Microwave the Trifecta beef patties covered completely by a wet paper cloth towel, for a minute and a half. After the patties are slightly cooled down, crumble the patties to its original form - ground beef - with your hands into a bowl.
-            Keep warm.
-        <br/>
-            Step 5 : Warm-up quinoa in the microwave. In four bowls plate ⅓ cup of quinoa, followed by 4 ounces ground beef, ½ cup seasoned cucumber-tomato mix on the side, 1 tablespoon of hummus on another side, and top with greek yogurt by making long zig
-            zags with a squeeze bottle, or simply spooning 1 tablespoon in the middle of the bowl. Make it as pretty as you’d like!
-        <br/>
-            Step 6 : Garnish with red pepper flakes, parsley leaves, or fresh dill.
-        </td>
-      </tr>
-      <tr>
-        <td>Weight Loss</td>
-        <td>Breakfast - Chocolate-Raspberry Oatmeal</td>
-        <td>
-            Step 1 : In a medium saucepan stir together oats, cocoa powder and salt. Stir in almond milk.
-        <br/>
-            Step 2 : Bring to boiling over medium heat, stirring occasionally; reduce heat.
-        <br/>
-            Step 3 : Simmer, uncovered, 5 to 7 minutes or until thickened, stirring occasionally.
-        <br/>
-            Step 4 : Cover. Remove from heat; let stand 2 minutes.
-        <br/>
-            Step 5 : Divide oatmeal mixture among four serving bowls.
-        <br/>
-            Step 6 : Top each serving with 1/4 cup of the raspberries. If desired, drizzle each serving with 1 teaspoon of the chocolate syrup.
-        </td>
-      </tr>
-      <tr>
-        <td>Weight Loss</td>
-        <td>Lunch - Ginger chicken & green bean noodles</td>
-        <td>
-            Step 1 :Heat the oil in a wok over a high heat and stir-fry the chicken for 5 mins.
-        <br/>
-            Step 2 : Add the green beans and stir-fry for 4-5 mins more until the green beans are just tender, and the chicken is just cooked through.
-        <br/>
-            Step 3 : Stir in the fresh ginger and garlic, and stir-fry for 2 mins, then add the stem ginger and syrup, the cornflour mix, soy sauce and vinegar.
-        <br/>
-            Step 4 : Stir-fry for 1 min, then toss in the noodles.
-        <br/>
-            Step 5 : Cook until everything is hot and the sauce coats the noodles.
-        <br/>
-            Step 6 : Drizzle with more soy, if you like, and serve.
-        </td>
-      </tr>
-      <tr>
-        <td>Weight Loss</td>
-        <td>Dinner - Vegan Spinach and Sun-Dried Tomato Pasta</td>
-        <td>
-            Step 1 : Cook pasta according to the directions on the box.  Drain once complete.
-        <br/>
-            Step 2 : In a large skillet over medium heat, add oil.
-        <br/>
-            Step 3 : Once heated, and shiny, add in garlic and sun-dried tomatoes, stirring occasionally for 2 minutes.
-        <br/>
-            Step 4 : Add in coconut cream, paprika, salt, and chili powder. Stir together well. Bring to boil and then reduce to simmer.
-        <br/>
-            Step 5 : Add vegan parmesan cheese and stir until melted. The sauce should begin to thicken.
-        <br/>
-            Step 6 : *Add more coconut cream is sauce is too thick or continue to simmer if too saucy until desired consistency.
-        <br/>
-            Step 7 : Add in the spinach and stir until it’s wilts down.
-        <br/>
-            Step 8 : Remove from heat and toss in cooked and drained pasta noodles.
-        <br/>
-            Step 9 : Top with fresh chopped basil as a garnish over the top.
-        </td>
-      </tr>
-      <tr>
-        <td>Healthy</td>
-        <td>Breakfast - Banana Bread French Toast</td>
-        <td>
-            Step 1 : Whisk eggs, milk, vanilla and cinnamon in a 4-cup measuring cup or mixing bowl.
-        <br/>
-            Step 2 : Arrange 4 slices of banana bread in a 9-by-13-inch baking dish.
-        <br/>
-            Step 3 : Pour half of the egg mixture over the bread. Let soak for 1 minute, then turn the slices over and soak for 1 minute more.
-        <br/>
-            Step 4 : Heat 1 tablespoon butter in a large nonstick skillet over medium heat. Add the slices and cook until golden, 2 to 3 minutes per side.
-        <br/>
-            Step 5 : Transfer to a plate and cover to keep warm. Repeat with the remaining banana bread, egg mixture and butter.
-        <br/>
-            Step 6 : To serve, top with walnuts, sliced banana and maple syrup, if desired.
-        </td>
-      </tr>
-      <tr>
-        <td>Healthy</td>
-        <td>Lunch - Instant Pot Beef Curry</td>
-        <td>
-            Step 1 : Press Sauté on multicooker and heat 1 tablespoon oil. Add onion and pepper, season with 1/4 teaspoon each salt and pepper, and sauté until just tender, 5 minutes; transfer to bowl.
-        <br/>
-            Step 2 : Add remaining tablespoon oil, season beef with 1/4 teaspoon each salt and pepper, and cook until browned on all sides, about 5 minutes.
-        <br/>
-            Step 3 : Whisk together coconut milk and curry paste, add to pot, and scrape up any brown bits. Cover and lock lid and cook on high pressure for 35 minutes.
-        <br/>
-            Step 4 : Use natural release method for 10 minutes, then release any remaining pressure.
-        <br/>
-            Step 5 : Using 2 forks, break up meat into pieces, then toss with onion and red pepper.
-        <br/>
-            Step 6 : Serve over rice along with lime wedges and topped with cilantro and red chile if desired.
-        </td>
-      </tr>
-      <tr>
-        <td>Healthy</td>
-        <td>Dinner - Creamy Chicken & Mushrooms</td>
-        <td>
-            Step 1 : Sprinkle chicken with 1/4 teaspoon each kosher salt and pepper. Heat 1 tablespoon canola oil in a large skillet over medium heat.
-        <br/>
-            Step 2 : Cook the chicken, turning once, until browned and just cooked through, 7 to 10 minutes total. Transfer to a plate.
-        <br/>
-            Step 3 : Add 1 tablespoon oil and mushrooms to the pan; cook, stirring occasionally, until the liquid has evaporated, about 4 minutes.
-        <br/>
-            Step 4 : Increase heat to high, add wine and cook until it has mostly evaporated, about 4 minutes.
-        <br/>
-            Step 5 : Reduce heat to medium; stir in cream, any accumulated juice from the chicken and 1/4 teaspoon each salt and pepper.
-        <br/>
-            Step 6 : Return the chicken to the pan and turn to coat with the sauce.
-        <br/>
-            Step 7 : Serve the chicken topped with the sauce and sprinkled with parsley.
-       </td>
-      </tr>
-    </table>
-        <script type="text/javascript">
-			$(function() {
-				var $mybook 		= $('#mybook');
-				var $bttn_next		= $('#next_page_button');
-				var $bttn_prev		= $('#prev_page_button');
-				var $loading		= $('#loading');
-				var $mybook_images	= $mybook.find('img');
-				var cnt_images		= $mybook_images.length;
-				var loaded			= 0;
+        <div id="avoid" class="tabcontent" style="background:url('website_images/food-waste.jpeg') no-repeat center center fixed; background-size: 100%;">
+          <div class="tab-desc">
+            <h2>6. Avoid going for too much food</h2>
+            <p>Lastly, planning of what amount of food is enough and sufficient for you in the long run.</p>
+            <p>Before spending on buying more food, think first if it is neccessary to buy first and whether it is enough to suit your needs. <br>
+              If it is in your plan that you do not need such a large amount of food, then you can reduce the portion of what you buy. Always make a conscious effort to serve food in smaller portions. <br>
+              Even in restaurants and if you do happen to have more than what you can finish on the table, there is never a problem to take the food back as a take-away to finish it back home.</p>
+          </div>
+        </div>
 
-				$mybook_images.each(function(){
-					var $img 	= $(this);
-					var source	= $img.attr('src');
-					$('<img/>').load(function(){
-						++loaded;
-						if(loaded == cnt_images){
-							$loading.hide();
-							$bttn_next.show();
-							$bttn_prev.show();
-							$mybook.show().booklet({
-								name:               null,                            //
-								width:              800,                             //
-								height:             500,                             //
-								speed:              600,                             //
-								direction:          'LTR',                           //
-								                           //
-								next:               $bttn_next,          			//
-								prev:               $bttn_prev,          			//
+        <div id="ai">
+          <h1>What is Artificial Intelligence?</h1>
+          <img src="website_images/DexDreamin_artificial_intelligence_d88936ba-60fd-46b0-a496-14d70803ca14.png" alt="ai" style="float: right; height: 20em;">
+          <p>Artificial intelligence is a theory and development of computer systems to be able to perform tasks normally requiring human intelligence. </p>
+          <h2>How are we implementing Artificial Intelligence into our solution? </h2>
+          <h3>Current applications and implementations of AI technology: </h3>
+          <ul>
+            <li>Automation</li>
+            <li>Machine learning</li>
+            <li>Machine vision</li>
+            <li>Natural language processing(NLP)</li>
+            <li>Robotics</li>
+            <li>Self-driving cars</li>
+          </ul>
+          <h3>How are we implementing AI to solve our solution?</h3>
+          <p>We will leverage the use of AI to provide methods of what meals has the least carbon emissions so that our users will not spend and waste on food unneccessarily. </p>
+          <p>With this technology, less food will be wasted and the lesser amount of carbon emissions will also reduce the rate of greenhouse gases being trapped in the atmosphere and as well as minimising climate change as much as possible, with the technology of our chatbot.</p>
+          <p>Scroll down to find out more about our new solution and what it can do</p>
+        </div>
+    </div>
+    <!-- Opening tabs function  -->
+    <script>
+    //redirects when user clicks on one of the slides and opens the tab for them
+    function gototab(redirect_id, no) {
+      location.replace(redirect_id);
+      opentab(event, redirect_id);
+    }
+    //sets this tab open by default when user first loads their browser
+    document.getElementById("defaultTab").click();
+    //main tab function
+    function opentab(evt, id_name) {
+      var i, tabcontent, id_name;
 
-							});
-							Cufon.refresh();
-						}
-					}).attr('src',source);
-				});
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        
+      }
 
-			});
-        </script>
+      // Get all elements with class="tablinks" and remove the class "active"
+      let tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.querySelector(id_name).style.display = "block";
+      evt.currentTarget.className += " active";
 
-    </body>
 
+    }
+    </script>
+    <!-- Slide control function -->
+    <script>
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        let text = document.getElementsByClassName("text");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none"; 
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
+        }    
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+
+        
+       
+      }
+    </script>
+</article>
+<iframe width="100%" height="720" src="slidingfile.html"frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </html>

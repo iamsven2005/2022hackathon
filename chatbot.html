@@ -451,36 +451,49 @@ body {
 
     .tab button {
       float: left;
-      border: none;
+      border: 1px solid rgba(0,0,0,0.75);
       cursor: pointer;
-      background:url("website_images/dark-brown.webp");
+      background:url("website_images/mid-brown.webp");
+      color:white;
       padding: 14px 16px;
+      border-radius: 10px 10px 0 0;
       transition: 0.3s;
     }
 
     /* Change background color of buttons on hover */
     .tab button:hover {
       background:url('website_images/light-brown.jpg');
+      color:grey;
+      border:none;
+      padding: 15px 16px;
     }
 
     /* Create an active/current tablink class */
     .tab button.active {
       background:url("website_images/brown-paper.jpg");
+      color:black;
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
+      margin-right:5px;
+      border:none;
+      padding: 20px 16px;
+      
     }
 
     /*Display contents when a user opens a specific tab*/
     .tabcontent {
       display: none;
       padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-top: none;
+      border: 5px solid transparent;
+      border-image: url("website_images/brown-paper.jpg") 30 stretch;
       height: 500px;
-      background-size: cover;
+      background-size: 100%;
       font-weight: bold;
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
     }
     /*tab description*/
     .tab-desc{
       background:url("website_images/brown-paper.jpg");
+      box-shadow: 9px 10px 5px 0px rgba(0,0,0,0.75);
     }
     
     .center {
@@ -503,29 +516,29 @@ body {
         <h3>How can we reduce food wastage? Scroll below the slides or click one of the slides to find out more of what we can do!</h3>
         <div class="slideshow-container">
           <div class="mySlides fade">
-            <img src="website_images/writing.jpg" onclick="gototab('#meal-plan')" style="width:100%">
+            <img src="website_images/writing.jpg" onclick="gototab('#meal-plan',0)" style="width:100%">
             <div class="text" style="color:black">Make a meal plan</div>
           </div>
           
           <div class="mySlides fade">
-            <img id="image" src="website_images/shopping-list.jpg" onclick="gototab('#shopping-list')" style="width:100%;">
+            <img id="image" src="website_images/shopping-list.png" onclick="gototab('#shopping-list',1)" style="width:100%;">
             <div class="text" style="color:black">Craft a shopping/grocery list</div>
           </div>
           
           <div class="mySlides fade">
-            <img id="image" src="website_images/food-donation.jpg" onclick="gototab('#food-banks')" style="width:100%">
+            <img id="image" src="website_images/food-donation.jpg" onclick="gototab('#food-banks',2)" style="width:100%">
             <div class="text">Donate your food to food banks!</div>
           </div>
           <div class="mySlides fade">
-            <img id="image" src="website_images/cutting_vegetables.webp" onclick="gototab('#leftover')" style="width:100%">
+            <img id="image" src="website_images/cutting_vegetables.webp" onclick="gototab('#leftover',3)" style="width:100%">
             <div class="text">Using leftovers to cook up some delicious recipes!</div>
           </div>
           <div class="mySlides fade">
-            <img id="image" src="website_images/food-in-fridge.webp" onclick="gototab('#store')" style="width:100%">
+            <img id="image" src="website_images/food-in-fridge.webp" onclick="gototab('#store',4)" style="width:100%">
             <div class="text" style="color:black">How you should properly store your food</div>
           </div>
           <div class="mySlides fade">
-            <img id="image" src="website_images/food-waste.jpeg" onclick="gototab('#avoid')" style="width:100%">
+            <img id="image" src="website_images/food-waste.jpeg" onclick="gototab('#avoid',5)" style="width:100%">
             <div class="text">Avoid going for more!</div>
           </div>
           
@@ -558,7 +571,7 @@ body {
             <p>Additionally, it can also save you a lot of money too so <b>PLAN WISELY</b> before spending on food.</p>
           </div>
         </div>
-        <div id="shopping-list" class="tabcontent" style="background:url('website_images/shopping-list.jpg') no-repeat center center fixed">
+        <div id="shopping-list" class="tabcontent" style="background:url('website_images/shopping-list.png') no-repeat center top fixed;">
           <div class="tab-desc">
             <h2>2. Creating and preparing a shopping list</h2>
             <p>Preparing a shopping list is a good way as a reminder of what food is really neccessary to stock up before heading to the supermarket to buy the stock off the shelves!</p>
@@ -571,7 +584,7 @@ body {
             You take your part in helping out the needy and contribute to donating food to them!</p>
           </div>
         </div>
-        <div id="leftover" class="tabcontent" style="background:url('website_images/cutting_vegetables.webp') no-repeat center center fixed">
+        <div id="leftover" class="tabcontent" style="background:url('website_images/cutting_vegetables.webp') no-repeat center center fixed; background-size: 100%">
           <div class="tab-desc">
             <h2>4. Cook up some delicious leftover recipes</h2>
             <p>Got any leftovers to spare? Well don't throw them away! <br> You can put these dishes to good use. Cook up a recipe using ingredients from your leftovers. </p>
@@ -604,6 +617,7 @@ body {
 
         <div id="ai">
           <h1>What is Artificial Intelligence?</h1>
+          <img src="website_images/DexDreamin_artificial_intelligence_d88936ba-60fd-46b0-a496-14d70803ca14.png" alt="ai" style="float: right; height: 20em;">
           <p>Artificial intelligence is a theory and development of computer systems to be able to perform tasks normally requiring human intelligence. </p>
           <h2>How are we implementing Artificial Intelligence into our solution? </h2>
           <h3>Current applications and implementations of AI technology: </h3>
@@ -624,7 +638,7 @@ body {
     <!-- Opening tabs function  -->
     <script>
     //redirects when user clicks on one of the slides and opens the tab for them
-    function gototab(redirect_id) {
+    function gototab(redirect_id, no) {
       location.replace(redirect_id);
       opentab(event, redirect_id);
     }

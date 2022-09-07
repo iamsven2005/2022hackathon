@@ -107,3 +107,5 @@ method and most delicious combinations of food.
 
 
 We decided to go for an app function due its ability to mass produce and relatively free. This low cost high reward system can allow for high adoption rate. With the right people to collaborate with, we think it can reduce food carbon footprint by up to 40%, up to 10% of the global carbon emmissions. 
+
+
